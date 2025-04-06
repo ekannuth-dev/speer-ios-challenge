@@ -11,7 +11,6 @@ import SwiftUI
 struct ProfileView: View {
     let user: GitHubUser
     @ObservedObject var viewModel: GitHubViewModel
-
     var body: some View {
         VStack(spacing: 16) {
             AsyncImage(url: URL(string: user.avatar_url)) { image in

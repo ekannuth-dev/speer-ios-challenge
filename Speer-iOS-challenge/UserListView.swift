@@ -36,11 +36,6 @@ struct UserListView: View {
 }
 
 
-struct LazyView<Content: View>: View {
-    let content: () -> Content
-    var body: some View { content() }
-}
-
 struct ProfileFromUsernameView: View {
     let username: String
     @StateObject var viewModel = GitHubViewModel()

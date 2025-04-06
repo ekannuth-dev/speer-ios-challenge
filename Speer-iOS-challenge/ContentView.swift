@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = GitHubViewModel()
-
     var body: some View {
         NavigationView {
             ScrollView {
@@ -56,6 +55,7 @@ struct ContentView: View {
                 }
             }
             .refreshable {
+                viewModel.invalidateCache(for: viewModel.username)
                 await viewModel.fetchUser()
             }
         }
