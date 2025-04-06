@@ -8,14 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = GitHubViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            VStack {
+                TextField("Enter GitHub username", text: $viewModel.username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocorrectionDisabled(true)
+                        .textInputAutocapitalization(.never)
+                    .padding()
+                if let user = viewModel.user {
+                    ProfileView(user: user, viewModel: viewModel)
+                } else if let error = viewModel.errorMessage {
+                    Text(error)
+                        .foregroundColor(.red)
+                        .padding()
+                } else {
+                    Spacer()
+                }
+            }
+            .navigationTitle("GitHub Search")
+            .onSubmit {
+                Task {
+                    await viewModel.fetchUser()
+                }
+            }
         }
-        .padding()
     }
 }
 
