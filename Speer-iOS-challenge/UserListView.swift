@@ -14,7 +14,7 @@ struct UserListView: View {
 
     var body: some View {
         List(users) { user in
-            NavigationLink(destination: ContentView()) {
+            NavigationLink(destination: ProfileFromUsernameView(username: user.login)) {
                 HStack {
                     AsyncImage(url: URL(string: user.avatar_url)) { image in
                         image.resizable()
@@ -56,6 +56,7 @@ struct ProfileFromUsernameView: View {
             }
         }
         .task {
+            viewModel.username = username
             await viewModel.fetchUser()
         }
     }

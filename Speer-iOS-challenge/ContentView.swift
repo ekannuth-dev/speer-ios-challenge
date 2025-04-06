@@ -9,14 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = GitHubViewModel()
-
     var body: some View {
         NavigationView {
             VStack {
+                Text("Enter a GitHub username")
+                    .font(.title2)
+                    .fontWeight(.medium)
+                    .padding(.top, 20)
+                
+                Text("Press return to search")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 10)
+                
                 TextField("Enter GitHub username", text: $viewModel.username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocorrectionDisabled(true)
-                        .textInputAutocapitalization(.never)
+                    .textInputAutocapitalization(.never)
                     .padding()
                 if let user = viewModel.user {
                     ProfileView(user: user, viewModel: viewModel)
