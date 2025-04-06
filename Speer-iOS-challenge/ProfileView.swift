@@ -30,13 +30,13 @@ struct ProfileView: View {
             }
 
             HStack {
-                NavigationLink("Followers: \(user.followers)", destination: UserListView(title: "Followers", fetchAction: {
-                    await viewModel.fetchFollowers(for: user.login)
-                }, users: viewModel.followers))
-
                 NavigationLink("Following: \(user.following)", destination: UserListView(title: "Following", fetchAction: {
                     await viewModel.fetchFollowing(for: user.login)
                 }, users: viewModel.following))
+                
+                NavigationLink("Followers: \(user.followers)", destination: UserListView(title: "Followers", fetchAction: {
+                    await viewModel.fetchFollowers(for: user.login)
+                }, users: viewModel.followers))
             }
             Spacer()
         }
